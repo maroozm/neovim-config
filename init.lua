@@ -347,7 +347,8 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
+        bashls = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -401,6 +402,7 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
+        'shfmt', -- Used to format bash code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -429,6 +431,7 @@ require('lazy').setup {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        sh = { 'shfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -542,13 +545,12 @@ require('lazy').setup {
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
-    'lunacookies/sorcisto',
+    'askfiy/visual_studio_code',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.cmd.colorscheme 'icefall'
+      vim.cmd.colorscheme 'visual_studio_code'
 
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
