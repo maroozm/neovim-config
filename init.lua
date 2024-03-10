@@ -235,7 +235,9 @@ require('lazy').setup {
 
       -- Shortcut ALICE directory
       vim.keymap.set('n', '<leader>sa', function()
-        builtin.find_files { cwd = '$HOME/alice/' } { ignore = { '.git', '$HOME/alice/sw/' } }
+        builtin.find_files {
+          search_dirs = { '/home/solus/alice/O2/', '/home/solus/alice/AliRoot/', '/home/solus/alice/AliPhysics/', '/home/solus/alice/QualityControl/' },
+        }
       end, { desc = '[S]earch [A]LICE directory' })
     end,
   },
@@ -545,12 +547,12 @@ require('lazy').setup {
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'askfiy/visual_studio_code',
+    'martinsione/darkplus.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.cmd.colorscheme 'visual_studio_code'
+      vim.cmd.colorscheme 'darkplus'
 
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
