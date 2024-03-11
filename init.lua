@@ -541,12 +541,28 @@ require('lazy').setup {
       }
     end,
   },
+  -- You can easily change to a different colorscheme.
+  -- Change the name of the colorscheme plugin below, and then
+  -- change the command in the config to whatever the name of that colorscheme is
+  {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('nordic').setup {
+        -- Enable bold keywords.
+        bold_keywords = true,
+        -- Enable brighter float border.
+        bright_border = true,
+        noice = {
+          -- Available styles: `classic`, `flat`.
+          style = 'flat',
+        },
+      }
+    end,
+  },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+  { -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
     'martinsione/darkplus.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
