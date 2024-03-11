@@ -236,7 +236,7 @@ require('lazy').setup {
       -- Shortcut ALICE directory
       vim.keymap.set('n', '<leader>sa', function()
         builtin.find_files {
-          search_dirs = { '/home/solus/alice/O2/', '/home/solus/alice/AliRoot/', '/home/solus/alice/AliPhysics/', '/home/solus/alice/QualityControl/' },
+          search_dirs = { '$HOME/alice/O2/', '$HOME/alice/AliRoot/', '$HOME/alice/AliPhysics/', '$HOME/alice/QualityControl/' },
         }
       end, { desc = '[S]earch [A]LICE directory' })
     end,
@@ -544,24 +544,6 @@ require('lazy').setup {
   -- You can easily change to a different colorscheme.
   -- Change the name of the colorscheme plugin below, and then
   -- change the command in the config to whatever the name of that colorscheme is
-  {
-    'AlexvZyl/nordic.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('nordic').setup {
-        -- Enable bold keywords.
-        bold_keywords = true,
-        -- Enable brighter float border.
-        bright_border = true,
-        noice = {
-          -- Available styles: `classic`, `flat`.
-          style = 'flat',
-        },
-      }
-    end,
-  },
-
   { -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
     'martinsione/darkplus.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -656,7 +638,7 @@ require('lazy').setup {
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
