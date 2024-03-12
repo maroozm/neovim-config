@@ -26,4 +26,22 @@ return {
     priority = 1000,
     opts = {},
   },
+  {
+    'Mofiqul/adwaita.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'rockyzhang24/arctic.nvim',
+    dependencies = { 'rktjmp/lush.nvim' },
+    name = 'arctic',
+    branch = 'main',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'Yazeed1s/minimal.nvim',
+    lazy = false,
+    priority = 1000,
+  },
 }
