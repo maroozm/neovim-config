@@ -44,4 +44,9 @@ return {
     lazy = false,
     priority = 1000,
   },
+  {
+    'numToStr/FTerm.nvim',
+    lazy = false,
+    priority = 1000,
+  },
 }
