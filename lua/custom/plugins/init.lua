@@ -49,4 +49,17 @@ return {
     lazy = false,
     priority = 1000,
   },
+  {
+    'norcalli/nvim-colorizer.lua',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'craftzdog/solarized-osaka.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = false,
+    },
+  },
 }
