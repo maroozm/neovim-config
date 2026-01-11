@@ -1,3 +1,5 @@
+local is_lxplus = vim.fn.hostname():match('lxplus') ~= nil
+
 local map = function(keys, func, desc, bufnr)
   vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
 end
@@ -51,7 +53,10 @@ local servers = {
     },
   },
   bashls = {},
-  lua_ls = {
+}
+
+if not is_lxplus then
+  servers.lua_ls = {
     settings = {
       Lua = {
         runtime = { version = 'LuaJIT' },
@@ -68,20 +73,27 @@ local servers = {
         },
       },
     },
-  },
-}
+  }
+end
 
-require('mason').setup()
-local ensure_installed = vim.tbl_keys(servers or {})
-vim.list_extend(ensure_installed, { 'stylua', 'shfmt' })
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+if not is_lxplus then
+  require('mason').setup()
+  local ensure_installed = vim.tbl_keys(servers or {})
+  vim.list_extend(ensure_installed, { 'stylua', 'shfmt' })
+  require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-require('mason-lspconfig').setup {
-  handlers = {
-    function(server_name)
-      local server = servers[server_name] or {}
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
-    end,
-  },
-}
+  require('mason-lspconfig').setup {
+    handlers = {
+      function(server_name)
+        local server = servers[server_name] or {}
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        require('lspconfig')[server_name].setup(server)
+      end,
+    },
+  }
+else
+  for server_name, server_config in pairs(servers) do
+    server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+    require('lspconfig')[server_name].setup(server_config)
+  end
+end
