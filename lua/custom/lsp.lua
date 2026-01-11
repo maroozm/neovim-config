@@ -1,4 +1,7 @@
-local is_lxplus = vim.fn.hostname():match('lxplus') ~= nil
+local hostname = vim.fn.hostname()
+local is_lxplus = hostname:match('lxplus') ~= nil 
+  or hostname:match('cern%.ch') ~= nil 
+  or vim.env.NVIM_LXPLUS_MODE ~= nil
 
 local map = function(keys, func, desc, bufnr)
   vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })

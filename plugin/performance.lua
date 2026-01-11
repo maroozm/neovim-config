@@ -6,7 +6,8 @@ vim.g.matchparen_insert_timeout = 20
 vim.opt.foldmethod = 'manual'
 vim.opt.foldexpr = ''
 
-if vim.fn.hostname():match('lxplus') then
+local hostname = vim.fn.hostname()
+if hostname:match('lxplus') or hostname:match('cern%.ch') or vim.env.NVIM_LXPLUS_MODE then
   vim.opt.undofile = false
   vim.opt.updatetime = 500
   
