@@ -51,15 +51,16 @@ local servers = {
       '--limit-results=50',
       '--pch-storage=memory',
     },
-    init_options = {
-      clangdFileStatus = false,
-    },
+    capabilities = capabilities,
   },
-  bashls = {},
+  bashls = {
+    capabilities = capabilities,
+  },
 }
 
 if not is_lxplus then
   servers.lua_ls = {
+    capabilities = capabilities,
     settings = {
       Lua = {
         runtime = { version = 'LuaJIT' },
@@ -79,6 +80,8 @@ if not is_lxplus then
   }
 end
 
+local has_new_lsp_api = vim.fn.has('nvim-0.11') == 1
+
 if not is_lxplus then
   require('mason').setup()
   local ensure_installed = vim.tbl_keys(servers or {})
@@ -90,13 +93,23 @@ if not is_lxplus then
       function(server_name)
         local server = servers[server_name] or {}
         server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-        require('lspconfig')[server_name].setup(server)
+        
+        if has_new_lsp_api then
+          vim.lsp.config(server_name, server)
+          vim.lsp.enable(server_name)
+        else
+          require('lspconfig')[server_name].setup(server)
+        end
       end,
     },
   }
 else
   for server_name, server_config in pairs(servers) do
-    server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
-    require('lspconfig')[server_name].setup(server_config)
+    if has_new_lsp_api then
+      vim.lsp.config(server_name, server_config)
+      vim.lsp.enable(server_name)
+    else
+      require('lspconfig')[server_name].setup(server_config)
+    end
   end
 end
