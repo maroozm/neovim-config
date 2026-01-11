@@ -62,4 +62,29 @@ return {
       transparent = false,
     },
   },
+  {
+    'Ferouk/bearded-nvim',
+    lazy = false,
+    transparent = false,
+    bold = true,
+    italic = true,
+    dim_inactive = false,
+    terminal_colors = true,
+  },
+  {
+    'maroozm/moegi-neovim',
+    branch = 'test',
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'mistricky/codesnap.nvim',
+    build = 'make build_generator',
+  },
+  { 'fcancelinha/nordern.nvim', branch = 'master', priority = 1000 },
+  {
+    'Yazeed1s/oh-lucy.nvim',
+    lazy = false,
+    priority = 1000,
+  },
 }
