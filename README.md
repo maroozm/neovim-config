@@ -1,3 +1,1 @@
-# created from kickstart.nvim
-colorscheme: askfiy/visual_studio_code 
-clangd installed
+minimal personal neovim config for lxplus
